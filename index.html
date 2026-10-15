@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Loops Interactive Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+    <div class="max-w-4xl mx-auto px-4 py-10">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <span class="bg-indigo-500/10 text-indigo-400 text-xs font-semibold px-3 py-1 rounded-full border border-indigo-500/20">Сараланған оқыту модулі</span>
+            <h1 class="text-3xl font-extrabold mt-3 tracking-tight">Python: For Циклдарының Зертханасы</h1>
+            <p class="text-slate-400 mt-2 text-sm">Өз деңгейіңізге сәйкес тапсырманы таңдап, онлайн орындаңыз!</p>
+        </header>
+
+        <!-- Level Selector Tabs -->
+        <div class="grid grid-cols-3 gap-3 mb-8">
+            <button onclick="switchLevel('a')" id="btn-a" class="p-4 rounded-xl border border-indigo-500 bg-indigo-600/20 text-indigo-300 font-medium transition text-left">
+                <div class="text-xs text-indigo-400 uppercase tracking-wider">Деңгей 1</div>
+                <div class="text-lg font-bold">А (Репродуктивті)</div>
+            </button>
+            <button onclick="switchLevel('b')" id="btn-b" class="p-4 rounded-xl border border-slate-800 bg-slate-900/50 text-slate-400 font-medium transition text-left hover:border-slate-700">
+                <div class="text-xs text-slate-500 uppercase tracking-wider">Деңгей 2</div>
+                <div class="text-lg font-bold">В (Өнімді)</div>
+            </button>
+            <button onclick="switchLevel('c')" id="btn-c" class="p-4 rounded-xl border border-slate-800 bg-slate-900/50 text-slate-400 font-medium transition text-left hover:border-slate-700">
+                <div class="text-xs text-slate-500 uppercase tracking-wider">Деңгей 3</div>
+                <div class="text-lg font-bold">С (Шығармашылық)</div>
+            </button>
+        </div>
+
+        <!-- Content Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div id="content-a" class="space-y-4">
+                <h2 class="text-xl font-bold text-indigo-300">А деңгейі: Кодты талдау және толықтыру</h2>
+                <p class="text-slate-300 text-sm">Берілген циклды зерттеңіз және 1-ден 10-ға дейінгі сандарды шығару үшін бос орынды толтырыңыз.</p>
+                <div class="bg-slate-950 p-4 rounded-lg font-mono text-sm text-emerald-400 border border-slate-800">
+                    for i in range(<input type="text" id="input-a" placeholder="мыльңы: 1, 11" class="bg-slate-900 border border-slate-700 px-2 py-1 rounded text-slate-100 w-32 focus:outline-none focus:border-indigo-500">):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(i)
+                </div>
+                <button onclick="checkLevelA()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2 rounded-lg transition text-sm">Нәтижені тексеру</button>
+                <div id="result-a" class="text-sm font-medium"></div>
+            </div>
+
+            <div id="content-b" class="space-y-4 hidden">
+                <h2 class="text-xl font-bold text-indigo-300">В деңгейі: Шартты оператормен жұмыс</h2>
+                <p class="text-slate-300 text-sm">1-ден 20-ға дейінгі сандардың ішінен тек <b>жұп сандарды</b> шығаратын шартты цикл жазыңыз.</p>
+                <div class="bg-slate-950 p-4 rounded-lg font-mono text-sm text-emerald-400 border border-slate-800">
+                    for i in range(1, 21):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if <input type="text" id="input-b" placeholder="мысалы: i % 2 == 0" class="bg-slate-900 border border-slate-700 px-2 py-1 rounded text-slate-100 w-48 focus:outline-none focus:border-indigo-500">:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i)
+                </div>
+                <button onclick="checkLevelB()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2 rounded-lg transition text-sm">Нәтижені тексеру</button>
+                <div id="result-b" class="text-sm font-medium"></div>
+            </div>
+
+            <div id="content-c" class="space-y-4 hidden">
+                <h2 class="text-xl font-bold text-indigo-300">С деңгейі: Көбейту кестесі генераторы</h2>
+                <p class="text-slate-300 text-sm">Кез келген санның 1-ден 10-ға дейінгі көбейту кестесін шығаратын цикл логикасын құрыңыз.</p>
+                <div class="bg-slate-950 p-4 rounded-lg font-mono text-sm text-emerald-400 border border-slate-800">
+                    n = 5<br>
+                    for i in range(1, 11):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(f"{n} x {i} = <input type="text" id="input-c" placeholder="мысалы: n * i" class="bg-slate-900 border border-slate-700 px-2 py-1 rounded text-slate-100 w-32 focus:outline-none focus:border-indigo-500">")
+                </div>
+                <button onclick="checkLevelC()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2 rounded-lg transition text-sm">Нәтижені тексеру</button>
+                <div id="result-c" class="text-sm font-medium"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchLevel(lvl) {
+            ['a', 'b', 'c'].forEach(l => {
+                document.getElementById(`content-${l}`).classList.add('hidden');
+                document.getElementById(`btn-${l}`).className = "p-4 rounded-xl border border-slate-800 bg-slate-900/50 text-slate-400 font-medium transition text-left hover:border-slate-700";
+            });
+            document.getElementById(`content-${lvl}`).classList.remove('hidden');
+            document.getElementById(`btn-${lvl}`).className = "p-4 rounded-xl border border-indigo-500 bg-indigo-600/20 text-indigo-300 font-medium transition text-left";
+        }
+
+        function checkLevelA() {
+            let val = document.getElementById('input-a').value.trim();
+            let res = document.getElementById('result-a');
+            if (val === '1, 11' || val === '1,11' || val === '0, 10' || val === '0,10') {
+                res.innerHTML = "✅ Дұрыс! Цикл сәтті құрылды.";
+                res.className = "text-sm font-medium text-emerald-400 mt-2";
+            } else {
+                res.innerHTML = "❌ Қате. Мысалы: 1, 11 немесе 0, 11 пайдаланыңыз.";
+                res.className = "text-sm font-medium text-rose-400 mt-2";
+            }
+        }
+
+        function checkLevelB() {
+            let val = document.getElementById('input-b').value.trim();
+            let res = document.getElementById('result-b');
+            if (val.includes('i % 2 == 0') || val.includes('i%2==0')) {
+                res.innerHTML = "✅ Керемет! Жұп сандарды таңдау шарты дұрыс.";
+                res.className = "text-sm font-medium text-emerald-400 mt-2";
+            } else {
+                res.innerHTML = "❌ Қате. Шартты дұрыс жазыңыз: i % 2 == 0";
+                res.className = "text-sm font-medium text-rose-400 mt-2";
+            }
+        }
+
+        function checkLevelC() {
+            let val = document.getElementById('input-c').value.trim();
+            let res = document.getElementById('result-c');
+            if (val.includes('n * i') || val.includes('n*i') || val.includes('i * n')) {
+                res.innerHTML = "✅ Тамаша! Шығармашылық деңгей сәтті орындалды.";
+                res.className = "text-sm font-medium text-emerald-400 mt-2";
+            } else {
+                res.innerHTML = "❌ Қате. Көбейту өрнегін көрсетіңіз: n * i";
+                res.className = "text-sm font-medium text-rose-400 mt-2";
+            }
+        }
+    </script>
+</body>
+</html>
